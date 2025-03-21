@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "33982E6E-ACA5-480D-9EAD-6107E3FD6DF3",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "OneEntryCoreTests",
+        "name" : "OneEntryCoreTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "OneEntryAttributeTests",
+        "name" : "OneEntryAttributeTests"
+      }
+    }
+  ],
+  "version" : 1
+}
