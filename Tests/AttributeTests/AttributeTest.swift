@@ -17,11 +17,12 @@ struct AttributeTest {
     let locale = "en_US"
     
     init() async throws {
-        try OneEntryCore.shared.initialize(
+        OneEntryApp.shared.initialize(
             host: "hummel-mobile.oneentry.cloud",
-            certificate: "system_certificate",
-            bundle: .module
-        )
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS290bGluIE11bHRpcGxhdGZvcm0iLCJzZXJpYWxOdW1iZXIiOjMsImlhdCI6MTczNTMyMjQ2NywiZXhwIjoxNzY2ODU4NDQ4fQ.3YZHZ39povhcmUpUAgMiD5b4NuZ9zK5ThObVYqkmvuk"
+        ) {
+            LogLevel(.all)
+        }
         
         self.page = try await PagesService.shared.page(url: "dev", langCode: locale)
     }

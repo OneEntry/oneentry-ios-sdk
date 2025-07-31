@@ -10,16 +10,19 @@ import Testing
 import OneEntryShared
 import OneEntryAuth
 import OneEntryForm
+import OneEntryCore
 
 struct Test {
     let authProviderMarker = "email"
     let userIdentifier = "artikdanilov@gmail.com"
     
     init() async throws {
-        OneEntryCore.shared.initialize(
+        OneEntryApp.shared.initialize(
             host: "hummel-mobile.oneentry.cloud",
             token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS290bGluIE11bHRpcGxhdGZvcm0iLCJzZXJpYWxOdW1iZXIiOjMsImlhdCI6MTczNTMyMjQ2NywiZXhwIjoxNzY2ODU4NDQ4fQ.3YZHZ39povhcmUpUAgMiD5b4NuZ9zK5ThObVYqkmvuk"
-        )
+        ) {
+            LogLevel(.all)
+        }
         
         try await AuthProviderService.shared.auth(marker: authProviderMarker) {
             AuthData(marker: "email_auth", value: userIdentifier)

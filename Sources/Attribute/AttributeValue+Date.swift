@@ -18,10 +18,10 @@ public extension AttributeValue {
         let timeZone = calendar.timeZone
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: dateTime)
         let attribute = AttributeValue.companion.fromDateTime(
-            dateTime: Kotlinx_datetimeLocalDateTime(
+            dateTime: .init(
                 year: Int32(components.year ?? 0),
-                monthNumber: Int32(components.month ?? 0),
-                dayOfMonth: Int32(components.day ?? 0),
+                month: Int32(components.month ?? 0),
+                day: Int32(components.day ?? 0),
                 hour: Int32(components.hour ?? 0),
                 minute: Int32(components.minute ?? 0),
                 second: Int32(components.second ?? 0),
@@ -45,10 +45,10 @@ public extension AttributeValue {
         let timeZone = calendar.timeZone
         let components = calendar.dateComponents([.year, .month, .day], from: date)
         let attribute = AttributeValue.companion.fromDate(
-            date: Kotlinx_datetimeLocalDate(
+            date: .init(
                 year: Int32(components.year ?? 0),
-                monthNumber: Int32(components.month ?? 0),
-                dayOfMonth: Int32(components.day ?? 0)
+                month: Int32(components.month ?? 0),
+                day: Int32(components.day ?? 0)
             ),
             timeZone: .companion.of(zoneId: timeZone.identifier),
             format: format

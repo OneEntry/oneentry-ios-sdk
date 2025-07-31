@@ -7,8 +7,7 @@
 
 import Foundation
 
-@resultBuilder
-public final class DSLBuilder<Result> {
+@resultBuilder public final class DSLBuilder<Result> {
     public static func buildBlock(_ components: [Result]...) -> [Result] {
         return components.flatMap { $0 }
     }

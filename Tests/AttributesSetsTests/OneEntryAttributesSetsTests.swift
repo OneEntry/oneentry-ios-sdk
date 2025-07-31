@@ -11,12 +11,14 @@ import OneEntryCore
 import OneEntryShared
 import OneEntryAttributesSets
 
-struct Test {
+struct OneEntryAttributesSetsTests {
     init() async throws {
-        OneEntryCore.shared.initialize(
+        OneEntryApp.shared.initialize(
             host: "hummel-mobile.oneentry.cloud",
             token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS290bGluIE11bHRpcGxhdGZvcm0iLCJzZXJpYWxOdW1iZXIiOjMsImlhdCI6MTczNTMyMjQ2NywiZXhwIjoxNzY2ODU4NDQ4fQ.3YZHZ39povhcmUpUAgMiD5b4NuZ9zK5ThObVYqkmvuk"
-        )
+        ) {
+            LogLevel(.all)
+        }
     }
     
     @Test
@@ -26,6 +28,7 @@ struct Test {
         var general: Attribute.General? = nil
         var list: Attribute.List? = nil
         var entity: Attribute.Entity? = nil
+        var interval: Attribute.TimeInterval? = nil
         
         for attribute in attributes {
             switch attribute {
@@ -35,12 +38,15 @@ struct Test {
                     list = attribute
                 case .entity(let attribute):
                     entity = attribute
+                case .timeInterval(let attribute):
+                    interval = attribute
             }
         }
         
         #expect(general != nil)
         #expect(list != nil)
         #expect(entity != nil)
+        #expect(interval != nil)
     }
     
     @Test

@@ -11,19 +11,22 @@ import Foundation
 
 @dynamicMemberLookup
 public enum Attribute: Sendable {
-    public typealias General = __Attribute.General
-    public typealias List = __Attribute.List
-    public typealias Entity = __Attribute.Entity
+    public typealias General = __AttributeGeneral
+    public typealias List = __AttributeList
+    public typealias Entity = __AttributeEntity
+    public typealias TimeInterval = __AttributeTimeInterval
     
     case general(general: General)
     case list(list: List)
     case entity(entity: Entity)
+    case timeInterval(interval: TimeInterval)
     
     public subscript<Value>(dynamicMember keyPath: KeyPath<__Attribute, Value>) -> Value {
         let attribute: __Attribute = switch self {
             case .general(let attribute): attribute
             case .list(let attribute): attribute
             case .entity(let attribute): attribute
+            case .timeInterval(let attribute): attribute
         }
         
         return attribute[keyPath: keyPath]
@@ -36,8 +39,10 @@ extension Attribute {
             .list(list: attribute)
         } else if let attribute = attribute as? Entity {
             .entity(entity: attribute)
+        } else if let attribute = attribute as? General {
+            .general(general: attribute)
         } else {
-            .general(general: attribute as! General)
+            .timeInterval(interval: attribute as! TimeInterval)
         }
     }
 }

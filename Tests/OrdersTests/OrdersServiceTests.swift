@@ -18,12 +18,12 @@ import OneEntryAttribute
 
 struct OrdersServiceTests {
     init() async throws {
-        try OneEntryCore.shared.initialize(
+        OneEntryApp.shared.initialize(
             host: "hummel-mobile.oneentry.cloud",
-            certificate: "custom_certificate",
-            password: "Apple2014",
-            bundle: .module
-        )
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS290bGluIE11bHRpcGxhdGZvcm0iLCJzZXJpYWxOdW1iZXIiOjMsImlhdCI6MTczNTMyMjQ2NywiZXhwIjoxNzY2ODU4NDQ4fQ.3YZHZ39povhcmUpUAgMiD5b4NuZ9zK5ThObVYqkmvuk"
+        ) {
+            LogLevel(.all)
+        }
         
         try await AuthProviderService.shared.auth(marker: "email") {
             AuthData(marker: "email_auth", value: "artikdanilov@gmail.com")

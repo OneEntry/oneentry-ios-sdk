@@ -8,7 +8,7 @@ let package = Package(
     name: "OneEntry",
     platforms: [
         .iOS(.v13),
-        .macOS(.v10_15),
+        .macOS(.v12),
         .watchOS(.v6),
         .tvOS(.v13),
         .visionOS(.v1)
@@ -58,10 +58,7 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
-        .sharedRemote(
-            version: "1.2.0",
-            checksum: "1e02e5ef45bc592833300e12eedecf2aaecd655c44f6a9b78b5e16b2421727d0"
-        ),
+        .sharedLocalDebug(),
         .core,
         .pages,
         .attribute,

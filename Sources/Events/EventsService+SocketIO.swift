@@ -12,9 +12,9 @@ import Foundation
 
 extension EventsService {
     static let socketIO: SocketManager = {
-        let configuration = OneEntryCore.shared.configuration
+        let configuration = EventsService.shared.configuration
         let url = URL(string: "https://" + configuration.host)!
-        let credential = configuration.credential
+        let credentials = configuration.credentials
         var headers: [String: String] = [:]
         
         if let accessToken = AccessService.shared.accessToken {
@@ -29,12 +29,12 @@ extension EventsService {
             .reconnectAttempts(5)
         ]
         
-        switch credential {
-            case let credential as TokenCredential:
-                headers["x-app-token"] = credential.token
+        switch credentials {
+            case let credentials as OneEntryAppCredentialsToken:
+                headers["x-app-token"] = credentials.token
                 
-            case let credential as SocketDeledate.Credential:
-                let delegate = SocketDeledate(credential: credential)
+            case let credentials as OneEntryAppCredentialsCertificate:
+                let delegate = SocketDeledate(credential: credentials)
                 config.insert(.sessionDelegate(delegate))
             
             default:
@@ -82,16 +82,16 @@ extension EventsService {
 fileprivate final class SocketDeledate: NSObject, URLSessionDelegate {
     typealias Credential = OneEntryShared.URLCredential
     
-    let credential: Credential
+    let credentials: OneEntryAppCredentialsCertificate
     
-    init(credential: Credential) {
-        self.credential = credential
+    init(credential: OneEntryAppCredentialsCertificate) {
+        self.credentials = credential
     }
     
     func urlSession(
         _ session: Foundation.URLSession,
         didReceive challenge: URLAuthenticationChallenge
     ) async -> (Foundation.URLSession.AuthChallengeDisposition, Foundation.URLCredential?) {
-        (.useCredential, credential.urlCredential)
+        (.useCredential, try? NSURLCredentialKt.NSURLCredential(path: credentials.path, password: credentials.password))
     }
 }
