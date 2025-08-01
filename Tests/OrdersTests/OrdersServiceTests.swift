@@ -39,7 +39,7 @@ struct OrdersServiceTests {
         let order = try await OrdersService.shared.create(
             marker: "delivery",
             formIdentifier: "delivery",
-            paymentAccountIdentifier: "cash"
+            paymentAccountIdentifier: "stripe"
         ) {
             FormDataContainer {
                 Locale("en_US") {
@@ -71,15 +71,15 @@ struct OrdersServiceTests {
     
     @Test
     func update() async throws {
-        let orders = try await OrdersService.shared.all(marker: "delivery", offset: 0, limit: 1, langCode: "en_US")
-        let id = try #require(orders.items().first?.id)
+        let orders = try await OrdersService.shared.all(marker: "delivery", offset: 0, limit: 30, langCode: "en_US")
+        let id = try #require(orders.items().randomElement()?.id)
         let status = "delivered"
         
         let order = try await OrdersService.shared.update(
             id: id,
             marker: "delivery",
             formIdentifier: "delivery",
-            paymentAccountIdentifier: "cash"
+            paymentAccountIdentifier: "stripe"
         ) {
             OrderStatus(status)
         }

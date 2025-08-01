@@ -53,7 +53,7 @@ struct SignUPTests {
         try await AuthProviderService.shared.activate(
             marker: authProviderMarker,
             userIdentifier: userIdentifier,
-            code: "684156"
+            code: "325125"
         )
     }
 }

@@ -45,7 +45,7 @@ struct Test {
                 Locale("en_US") {
                     FormData(marker: "name_auth", attribute: .init(string: settingName))
                 }
-            }
+            }                        
             
             State(settingState)
         }
