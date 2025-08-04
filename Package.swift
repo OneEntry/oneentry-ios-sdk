@@ -58,7 +58,7 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
-        .sharedLocalDebug(),
+        .sharedRemote(version: "2.0.0", checksum: "ffedd8d602adaec6e6ea31c417252262dc5070a3c446229334e0c759ceb2bde3"),
         .core,
         .pages,
         .attribute,
